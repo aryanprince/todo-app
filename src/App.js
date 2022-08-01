@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import TodoListFunc from './TodoList'
 import { v4 as uuidv4 } from 'uuid'
 
+import { ChakraProvider, Button, Input, Heading, Text, Badge } from '@chakra-ui/react'
+
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
 function App() {
@@ -40,25 +42,60 @@ function App() {
 
     return (
         <>
-            <div className="container">
-                <div className="row m-3">
-                    <div className="col">
-                        <input ref={todoNameRef} type="text" />
+            <ChakraProvider>
+                <div>
+                    <div>
+                        <Heading ml={5} my={4}>
+                            Todo List
+                        </Heading>
                     </div>
-                    <div className="col">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary" onClick={handleAddTodo}>
+                    <div>
+                        <div>
+                            <Input
+                                ml={5}
+                                my={2}
+                                w="90%"
+                                maxW="500px"
+                                variant="filled"
+                                ref={todoNameRef}
+                                placeholder="Type in your taks here..."
+                                type="text"
+                            />
+                        </div>
+                        <div>
+                            <Button
+                                ml={5}
+                                mt={3}
+                                mb={4}
+                                colorScheme="teal"
+                                variant="solid"
+                                onClick={handleAddTodo}
+                            >
                                 Add new
-                            </button>
-                            <button type="button" class="btn btn-danger" onClick={handleClearTodos}>
+                            </Button>
+                            <Button
+                                ml={2}
+                                mt={3}
+                                mb={4}
+                                colorScheme="teal"
+                                variant="outline"
+                                onClick={handleClearTodos}
+                            >
                                 Clear completed
-                            </button>
+                            </Button>
                         </div>
                     </div>
-                    <TodoListFunc todos={todos} toggleTodo={toggleTodo} />
-                    <div>{todos.filter((todo) => !todo.complete).length} left to do today</div>
+                    <div>
+                        <TodoListFunc todos={todos} toggleTodo={toggleTodo} />
+                        <div>
+                            <Badge fontSize="lg" ml={5} mt={4}>
+                                {todos.filter((todo) => !todo.complete).length} left to do
+                                today
+                            </Badge>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </ChakraProvider>
         </>
     )
 }
