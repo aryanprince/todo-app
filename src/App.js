@@ -51,7 +51,7 @@ function App() {
                             <Box fontSize="sm" as="i">
                                 <Text>A simple todo app utilizing local storage.</Text>
                                 <Text>
-                                    Desgined with <Link href="https://chakra-ui.com/">Chakra UI.</Link> Built by <Link href="https://github.com/aryanprince">Aryan Prince.</Link>
+                                    Designed with <Link href="https://chakra-ui.com/">Chakra UI.</Link> Built by <Link href="https://github.com/aryanprince">Aryan Prince.</Link>
                                 </Text>
                             </Box>
                         </Box>
