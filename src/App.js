@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import TodoListFunc from './TodoList'
 import { v4 as uuidv4 } from 'uuid'
 
-import { ChakraProvider, Button, Input, Heading, Text, Badge } from '@chakra-ui/react'
+import { ChakraProvider, Button, Input, Heading, Text, Badge, Box, Container, Link } from '@chakra-ui/react'
+import { FaPlus, FaCheck } from 'react-icons/fa'
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
@@ -43,58 +44,45 @@ function App() {
     return (
         <>
             <ChakraProvider>
-                <div>
-                    <div>
-                        <Heading ml={5} my={4}>
-                            Todo List
-                        </Heading>
-                    </div>
-                    <div>
-                        <div>
-                            <Input
-                                ml={5}
-                                my={2}
-                                w="90%"
-                                maxW="500px"
-                                variant="filled"
-                                ref={todoNameRef}
-                                placeholder="Type in your taks here..."
-                                type="text"
-                            />
-                        </div>
-                        <div>
-                            <Button
-                                ml={5}
-                                mt={3}
-                                mb={4}
-                                colorScheme="teal"
-                                variant="solid"
-                                onClick={handleAddTodo}
-                            >
-                                Add new
-                            </Button>
-                            <Button
-                                ml={2}
-                                mt={3}
-                                mb={4}
-                                colorScheme="teal"
-                                variant="outline"
-                                onClick={handleClearTodos}
-                            >
-                                Clear completed
-                            </Button>
-                        </div>
-                    </div>
-                    <div>
-                        <TodoListFunc todos={todos} toggleTodo={toggleTodo} />
-                        <div>
-                            <Badge fontSize="lg" ml={5} mt={4}>
-                                {todos.filter((todo) => !todo.complete).length} left to do
-                                today
-                            </Badge>
-                        </div>
-                    </div>
-                </div>
+                <Container maxW="xl" p="5" mt={[0, 0, 5]}>
+                    <Box ml={[1, 3, 5]}>
+                        <Box my={4}>
+                            <Heading>Todo List</Heading>
+                            <Box fontSize="sm" as="i">
+                                <Text>A simple todo app utilizing local storage.</Text>
+                                <Text>
+                                    Desgined with <Link href="https://chakra-ui.com/">Chakra UI.</Link> Built by <Link href="https://github.com/aryanprince">Aryan Prince.</Link>
+                                </Text>
+                            </Box>
+                        </Box>
+                        <Box>
+                            {/* INPUT FIELD */}
+                            <Box my={2} w="88%" maxW="500px">
+                                <Input variant="filled" ref={todoNameRef} placeholder="Type in your taks here..." />
+                            </Box>
+
+                            {/* BUTTONS */}
+                            <Box my={4}>
+                                <Button leftIcon={<FaPlus />} colorScheme="teal" variant="solid" onClick={handleAddTodo}>
+                                    Add new
+                                </Button>
+                                <Button ml={2} leftIcon={<FaCheck />} colorScheme="teal" variant="outline" onClick={handleClearTodos}>
+                                    Clear completed
+                                </Button>
+                            </Box>
+                        </Box>
+
+                        {/* TODOS + BADGE */}
+                        <Box>
+                            <TodoListFunc todos={todos} toggleTodo={toggleTodo} />
+                            <Box>
+                                <Badge fontSize="lg" mt={4}>
+                                    {todos.filter((todo) => !todo.complete).length} left to do today
+                                </Badge>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Container>
             </ChakraProvider>
         </>
     )
